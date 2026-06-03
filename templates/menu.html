@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero menu-hero">
+    <div class="container">
+        <p class="eyebrow">{{ t.menu_eyebrow }}</p>
+        <h1>{{ t.menu_title }}</h1>
+        <p>{{ t.menu_subtitle }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="filter-bar reveal" role="group" aria-label="{{ t.menu_eyebrow }}">
+            <button class="filter-button active" type="button" data-filter="all">{{ t.menu_filter_all }}</button>
+            {% for category in menu_categories %}
+            <button class="filter-button" type="button" data-filter="{{ category.slug }}">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+
+        <div class="menu-list">
+            {% for category in menu_categories %}
+            <section class="menu-category reveal" data-category="{{ category.slug }}">
+                <div class="category-title">
+                    <h2>{{ category.name }}</h2>
+                    <span>{{ category["items"]|length }} {{ t.menu_count_one }}</span>
+                </div>
+                <div class="menu-grid">
+                    {% for item in category["items"] %}
+                    <article class="menu-card">
+                        <div class="menu-card-media">
+                            <img src="{{ url_for('static', filename='img/' ~ item.image) }}" alt="{{ item.name }}" loading="lazy">
+                        </div>
+                        <div class="menu-card-body">
+                            <div class="menu-card-top">
+                                <h3>{{ item.name }}</h3>
+                                <span>{{ item.price }}</span>
+                            </div>
+                            <p>{{ item.description }}</p>
+                            <a class="text-link small" href="{{ url_for('booking_page') }}">{{ t.menu_order }} &rarr;</a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

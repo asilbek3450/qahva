@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero hero-home">
+    <div class="container hero-inner">
+        <div class="hero-copy reveal">
+            <p class="eyebrow">{{ t.home_eyebrow }}</p>
+            <h1>{{ t.home_title }}</h1>
+            <p class="hero-text">{{ t.home_text }}</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="{{ url_for('menu_page') }}">{{ t.home_btn_menu }}</a>
+                <a class="btn btn-secondary" href="{{ url_for('booking_page') }}">{{ t.home_btn_booking }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="eyebrow">{{ t.featured_eyebrow }}</p>
+            <h2>{{ t.featured_heading }}</h2>
+        </div>
+        <div class="menu-grid compact">
+            {% for item in featured_items %}
+            <article class="menu-card reveal">
+                <div class="menu-card-media">
+                    <img src="{{ url_for('static', filename='img/' ~ item.image) }}" alt="{{ item.name }}" loading="lazy">
+                </div>
+                <div class="menu-card-body">
+                    <div class="menu-card-top">
+                        <h3>{{ item.name }}</h3>
+                        <span>{{ item.price }}</span>
+                    </div>
+                    <p>{{ item.description }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-muted">
+    <div class="container split-layout">
+        <div class="split-copy reveal">
+            <p class="eyebrow">{{ t.atmos_eyebrow }}</p>
+            <h2>{{ t.atmos_heading }}</h2>
+            <p>{{ t.atmos_text }}</p>
+            <a class="text-link" href="{{ url_for('about_page') }}">{{ t.atmos_link }} &rarr;</a>
+        </div>
+        <div class="image-panel reveal">
+            <img src="{{ url_for('static', filename='img/interior.jpg') }}" alt="{{ t.atmos_heading }}" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="stats-row reveal">
+            <div>
+                <strong>6+</strong>
+                <span>{{ t.stats_exp }}</span>
+            </div>
+            <div>
+                <strong>24</strong>
+                <span>{{ t.stats_drinks }}</span>
+            </div>
+            <div>
+                <strong>09:00</strong>
+                <span>{{ t.stats_open }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-muted">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="eyebrow">{{ t.home_gallery_eyebrow }}</p>
+            <h2>{{ t.home_gallery_heading }}</h2>
+        </div>
+        <div class="gallery-preview">
+            {% for image in gallery_preview %}
+            <a class="gallery-card reveal" href="{{ url_for('gallery_page') }}">
+                <img src="{{ url_for('static', filename='img/' ~ image.image) }}" alt="{{ image.alt }}" loading="lazy">
+                <span>{{ image.title }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

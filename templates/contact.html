@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero contact-hero">
+    <div class="container">
+        <p class="eyebrow">{{ t.contact_eyebrow }}</p>
+        <h1>{{ t.contact_title }}</h1>
+        <p>{{ t.contact_subtitle }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container contact-layout">
+        <div class="contact-panel reveal">
+            <h2>{{ t.contact_info_heading }}</h2>
+            <div class="contact-list">
+                <p><strong>{{ t.label_phone }}:</strong> <a href="tel:{{ t.phone | replace(' ', '') }}">{{ t.phone }}</a></p>
+                <p><strong>{{ t.label_email }}:</strong> <a href="mailto:{{ t.email }}">{{ t.email }}</a></p>
+                <p><strong>{{ t.label_address }}:</strong> {{ t.address }}</p>
+                <p><strong>{{ t.label_hours }}:</strong> {{ t.hours_full }}</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/coffee-cup.jpg') }}" alt="{{ t.contact_info_heading }}" loading="lazy">
+        </div>
+
+        <form class="panel-form reveal" data-demo-form novalidate>
+            <label>
+                {{ t.form_name }}
+                <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <label>
+                {{ t.form_contact }}
+                <input type="text" name="contact" required>
+            </label>
+            <label>
+                {{ t.form_subject }}
+                <input type="text" name="subject" required>
+            </label>
+            <label>
+                {{ t.form_message }}
+                <textarea name="message" rows="6" required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">{{ t.form_submit_contact }}</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

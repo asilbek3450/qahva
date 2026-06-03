@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero gallery-hero">
+    <div class="container">
+        <p class="eyebrow">{{ t.gallery_eyebrow }}</p>
+        <h1>{{ t.gallery_title }}</h1>
+        <p>{{ t.gallery_subtitle }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="gallery-grid">
+            {% for image in gallery_images %}
+            <article class="gallery-card reveal">
+                <img src="{{ url_for('static', filename='img/' ~ image.image) }}" alt="{{ image.alt }}" loading="lazy">
+                <span>{{ image.title }}</span>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero about-hero">
+    <div class="container">
+        <p class="eyebrow">{{ t.about_eyebrow }}</p>
+        <h1>{{ t.about_title }}</h1>
+        <p>{{ t.about_subtitle }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container split-layout reverse">
+        <div class="image-panel reveal">
+            <img src="{{ url_for('static', filename='img/team.jpg') }}" alt="{{ t.about_hist_heading }}" loading="lazy">
+        </div>
+        <div class="split-copy reveal">
+            <p class="eyebrow">{{ t.about_hist_eyebrow }}</p>
+            <h2>{{ t.about_hist_heading }}</h2>
+            <p>{{ t.about_hist_p1 }}</p>
+            <p>{{ t.about_hist_p2 }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="section section-muted">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="eyebrow">{{ t.about_val_eyebrow }}</p>
+            <h2>{{ t.about_val_heading }}</h2>
+        </div>
+        <div class="value-grid">
+            <article class="value-card reveal">
+                <h3>{{ t.value1_title }}</h3>
+                <p>{{ t.value1_text }}</p>
+            </article>
+            <article class="value-card reveal">
+                <h3>{{ t.value2_title }}</h3>
+                <p>{{ t.value2_text }}</p>
+            </article>
+            <article class="value-card reveal">
+                <h3>{{ t.value3_title }}</h3>
+                <p>{{ t.value3_text }}</p>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

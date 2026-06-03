@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero booking-hero">
+    <div class="container">
+        <p class="eyebrow">{{ t.booking_eyebrow }}</p>
+        <h1>{{ t.booking_title }}</h1>
+        <p>{{ t.booking_subtitle }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container form-layout">
+        <div class="split-copy reveal">
+            <p class="eyebrow">{{ t.booking_reserve_eyebrow }}</p>
+            <h2>{{ t.booking_reserve_heading }}</h2>
+            <p>{{ t.booking_reserve_text }}</p>
+            <div class="contact-list">
+                <p><strong>{{ t.label_phone }}:</strong> <a href="tel:{{ t.phone | replace(' ', '') }}">{{ t.phone }}</a></p>
+                <p><strong>{{ t.label_hours }}:</strong> 09:00 - 22:00</p>
+                <p><strong>{{ t.label_address }}:</strong> {{ t.address }}</p>
+            </div>
+        </div>
+
+        <form class="panel-form reveal" data-demo-form novalidate>
+            <label>
+                {{ t.form_name }}
+                <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <label>
+                {{ t.form_phone }}
+                <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+            <div class="two-columns">
+                <label>
+                    {{ t.form_date }}
+                    <input type="date" name="date" required>
+                </label>
+                <label>
+                    {{ t.form_time }}
+                    <input type="time" name="time" required>
+                </label>
+            </div>
+            <label>
+                {{ t.form_guests }}
+                <input type="number" name="guests" min="1" max="16" value="2" required>
+            </label>
+            <label>
+                {{ t.form_note }}
+                <textarea name="message" rows="4" placeholder="{{ t.form_note_ph }}"></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">{{ t.form_submit_booking }}</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

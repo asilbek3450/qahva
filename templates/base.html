@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f2522">
+    <meta name="description" content="{{ t.footer_tagline }}">
+    <title>{% if title %}{{ title }} | {% endif %}{{ t.brand }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-lang="{{ lang }}"
+      data-alert-named="{{ t.js_alert_named }}"
+      data-alert-plain="{{ t.js_alert_plain }}"
+      data-alert-tail="{{ t.js_alert_tail }}">
+    <a class="skip-link" href="#main-content">{{ t.skip_to_content }}</a>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="brand" href="{{ url_for('bosh_sahifa') }}" aria-label="{{ t.brand }}">
+                <span class="brand-mark">QD</span>
+                <span>{{ t.brand }}</span>
+            </a>
+
+            <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="{{ t.open_menu }}">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="site-nav" id="primary-navigation" data-nav-menu aria-label="{{ t.brand }}">
+                {% for endpoint, label in nav_links %}
+                <a href="{{ url_for(endpoint) }}" class="{% if request.endpoint == endpoint %}active{% endif %}">{{ label }}</a>
+                {% endfor %}
+
+                <div class="lang-dropdown" data-lang-dropdown>
+                    <button class="lang-trigger" type="button" data-lang-trigger aria-haspopup="true" aria-expanded="false" aria-label="{{ t.lang_label }}">
+                        <span class="lang-flag" aria-hidden="true">{{ languages[lang].flag }}</span>
+                        <span class="lang-code">{{ languages[lang].short }}</span>
+                        <svg class="lang-caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <ul class="lang-menu" role="menu" aria-label="{{ t.lang_label }}">
+                        {% for code, info in languages.items() %}
+                        <li role="none">
+                            <a class="lang-option {% if code == lang %}active{% endif %}"
+                               role="menuitem"
+                               href="{{ url_for('set_lang', code=code) }}"
+                               hreflang="{{ code }}"
+                               aria-current="{{ 'true' if code == lang else 'false' }}">
+                                <span class="lang-flag" aria-hidden="true">{{ info.flag }}</span>
+                                <span>{{ info.label }}</span>
+                                {% if code == lang %}<span class="lang-check" aria-hidden="true">✓</span>{% endif %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <a class="brand footer-brand" href="{{ url_for('bosh_sahifa') }}">
+                    <span class="brand-mark">QD</span>
+                    <span>{{ t.brand }}</span>
+                </a>
+                <p>{{ t.footer_tagline }}</p>
+            </div>
+            <div>
+                <h2>{{ t.footer_hours_title }}</h2>
+                <p>{{ t.footer_hours_value }}</p>
+                <p>{{ t.address }}</p>
+            </div>
+            <div>
+                <h2>{{ t.footer_contact_title }}</h2>
+                <p><a href="tel:{{ t.phone | replace(' ', '') }}">{{ t.phone }}</a></p>
+                <p><a href="mailto:{{ t.email }}">{{ t.email }}</a></p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <span>&copy; {{ current_year }} {{ t.brand }}.</span>
+            <span>{{ t.footer_rights }}</span>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
